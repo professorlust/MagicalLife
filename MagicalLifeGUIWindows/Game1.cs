@@ -13,6 +13,7 @@ using MagicalLifeSettings.Storage;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 
 namespace MagicalLifeGUIWindows
@@ -130,7 +131,7 @@ namespace MagicalLifeGUIWindows
         protected override void Draw(GameTime gameTime)
         {
             this.DisplayInGame();
-            FMODUtil.System.update();
+            this.UpdateSoundSystem();
             this.GraphicsDevice.SetRenderTarget(null);
             this.GraphicsDevice.Clear(Color.Black);
 
@@ -164,6 +165,13 @@ namespace MagicalLifeGUIWindows
             }
 
             base.Draw(gameTime);
+        }
+
+        private void UpdateSoundSystem()
+        {
+            int listenerX = (RenderingPipe.FullScreenWindow.Width / 2) + RenderingPipe.XViewOffset;
+            int listenerY = (RenderingPipe.FullScreenWindow.Height / 2) + RenderingPipe.YViewOffset;
+            FMODUtil.Update(listenerX, listenerY);
         }
 
         private void DisplayInGame()

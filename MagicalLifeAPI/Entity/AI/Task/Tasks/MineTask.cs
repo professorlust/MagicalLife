@@ -2,6 +2,7 @@
 using MagicalLifeAPI.DataTypes;
 using MagicalLifeAPI.Filing.Logging;
 using MagicalLifeAPI.Registry.ItemRegistry;
+using MagicalLifeAPI.Sound;
 using MagicalLifeAPI.Util.Reusable;
 using MagicalLifeAPI.World.Base;
 using ProtoBuf;
@@ -64,6 +65,7 @@ namespace MagicalLifeAPI.Entity.AI.Task.Tasks
             if (this.HitTimer.Allow())
             {
                 List<World.Base.Item> drop = this.Minable.MiningBehavior.MineSomePercent(.1F);
+                FMODUtil.RaiseEvent(EffectsTable.PickaxeHit, this.Target);
 
                 if (drop != null && drop.Count > 0)
                 {

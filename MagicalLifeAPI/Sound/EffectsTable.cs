@@ -8,5 +8,6 @@
         public static readonly string PickaxeHit = "event:/Pickaxe_Hit";
         public static readonly string UIClick = "event:/UI/Click";
         public static readonly string FootSteps = "event:/Footsteps";
+        public static readonly string Ambient = "event:/Ambience";
     }
 }

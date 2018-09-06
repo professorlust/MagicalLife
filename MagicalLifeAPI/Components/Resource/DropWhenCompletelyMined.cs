@@ -27,7 +27,6 @@ namespace MagicalLifeAPI.Components.Resource
 
         protected override List<Item> MinePercent(float percentMined)
         {
-            FMODUtil.RaiseEvent(EffectsTable.PickaxeHit);
             return null;
         }
     }
