@@ -104,10 +104,10 @@
     <Compile Include="Visual\Rendering\Animation\XMLPaths.cs" />
     <Compile Include="Visual\Rendering\IRenderable.cs" />
     <Compile Include="Visual\Rendering\IRenderContainer.cs" />
-    <Compile Include="Visual\Rendering\Animation\AnimatedTexture.cs" />
+    <Compile Include="Visual\Rendering\AbstractVisuals\AnimatedTexture.cs" />
     <Compile Include="Visual\Rendering\Animation\AnimationSequence.cs" />
     <Compile Include="Visual\Rendering\ComponentRenderer.cs" />
-    <Compile Include="Visual\Rendering\AbstractVisual.cs" />
+    <Compile Include="Visual\Rendering\AbstractVisuals\AbstractVisual.cs" />
     <Compile Include="Visual\Rendering\MapBatch.cs" />
     <Compile Include="Visual\Rendering\RenderInfo.cs" />
     <Compile Include="Visual\Rendering\RenderLayer.cs" />
@@ -116,7 +116,7 @@
     <Compile Include="Components\Resource\AbstractHarvestable.cs" />
     <Compile Include="Components\Resource\DropWhenCompletelyHarvested.cs" />
     <Compile Include="Components\Resource\IHarvestable.cs" />
-    <Compile Include="Visual\Rendering\StaticTexture.cs" />
+    <Compile Include="Visual\Rendering\AbstractVisuals\StaticTexture.cs" />
     <Compile Include="DataTypes\Attribute\ModifierFloat.cs" />
     <Compile Include="DataTypes\FixedSizeQueue.cs" />
     <Compile Include="DataTypes\Point2D.cs" />
