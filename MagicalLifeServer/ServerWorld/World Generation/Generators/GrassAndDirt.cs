@@ -55,7 +55,7 @@ namespace MagicalLifeServer.ServerWorld.World
 
                             if (random.Next(4) == 2)
                             {
-                                tile.Resources = new Stone(random.Next(25) + 1);
+                                tile.Resources = new Rock(random.Next(25) + 1);
                                 tile.IsWalkable = false;
                             }
 
