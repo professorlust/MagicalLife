@@ -6,17 +6,17 @@ using System.Collections.Generic;
 namespace MagicalLifeAPI.Components.Resource
 {
     [ProtoContract]
-    public class DropWhenCompletelyMined : AbstractMinable
+    public class DropWhenCompletelyHarvested : AbstractHarvestable
     {
         [ProtoMember(1)]
         protected List<Item> Items { get; set; }
 
-        public DropWhenCompletelyMined(List<Item> items)
+        public DropWhenCompletelyHarvested(List<Item> items)
         {
             this.Items = items;
         }
 
-        public DropWhenCompletelyMined()
+        public DropWhenCompletelyHarvested()
         {
         }
 
@@ -25,7 +25,7 @@ namespace MagicalLifeAPI.Components.Resource
             return this.Items;
         }
 
-        protected override List<Item> MinePercent(float percentMined)
+        protected override List<Item> HarvestedPercent(float percentMined)
         {
             FMODUtil.RaiseEvent(EffectsTable.PickaxeHit);
             return null;

@@ -113,9 +113,9 @@
     <Compile Include="Visual\Rendering\RenderLayer.cs" />
     <Compile Include="Visual\Rendering\RenderQueue.cs" />
     <Compile Include="Visual\Rendering\RenderQueueComparer.cs" />
-    <Compile Include="Components\Resource\AbstractMinable.cs" />
-    <Compile Include="Components\Resource\DropWhenCompletelyMined.cs" />
-    <Compile Include="Components\Resource\IMinable.cs" />
+    <Compile Include="Components\Resource\AbstractHarvestable.cs" />
+    <Compile Include="Components\Resource\DropWhenCompletelyHarvested.cs" />
+    <Compile Include="Components\Resource\IHarvestable.cs" />
     <Compile Include="Visual\Rendering\StaticTexture.cs" />
     <Compile Include="DataTypes\Attribute\ModifierFloat.cs" />
     <Compile Include="DataTypes\FixedSizeQueue.cs" />

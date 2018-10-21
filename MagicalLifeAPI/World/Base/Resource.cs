@@ -17,7 +17,7 @@ namespace MagicalLifeAPI.World.Base
     /// </summary>
     [ProtoContract]
     [ProtoInclude(7, typeof(StoneBase))]
-    public abstract class Resource : HasTexture, IHasSubclasses, IMinable, IRenderable
+    public abstract class Resource : HasTexture, IHasSubclasses, IHarvestable, IRenderable
     {
         public Resource(string name, int durability)
         {
@@ -46,7 +46,7 @@ namespace MagicalLifeAPI.World.Base
         public Attribute32 MaxDurability { get; }
 
         [ProtoMember(6)]
-        public abstract AbstractMinable MiningBehavior { get; set; }
+        public abstract AbstractHarvestable HarvestingBehavior { get; set; }
 
         public Type GetBaseType()
         {
