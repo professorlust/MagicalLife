@@ -18,6 +18,10 @@ namespace MagicalLifeAPI.Components.Generic.Renderable
 
         public static readonly int Stone = 1000;
 
+        public static readonly int TreeStump = 1200;
+        public static readonly int TreeTrunk = 1201;
+        public static readonly int TreeLeaves = 1202;
+
 
         public static readonly int Character = 20000;
     }

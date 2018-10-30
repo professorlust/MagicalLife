@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MagicalLifeAPI.Asset;
 using MagicalLifeAPI.Components.Generic.Renderable;
 using MagicalLifeAPI.Components.Resource;
 using MagicalLifeAPI.World.Items;
@@ -17,6 +18,15 @@ namespace MagicalLifeAPI.World.Resources.Tree
         private static readonly string Name = "Oak Tree";
         private static readonly int Dura = 20;
 
+        private static readonly StaticTexture Stump = new 
+            StaticTexture(AssetManager.NameToIndex[TextureLoader.OakStump], RenderLayer.TreeStump);
+
+        private static readonly StaticTexture Trunk = new
+            StaticTexture(AssetManager.NameToIndex[TextureLoader.OakTrunk], RenderLayer.TreeTrunk);
+
+        private static readonly StaticTexture Leaves = new
+            StaticTexture(AssetManager.NameToIndex[TextureLoader.OakLeaves1], RenderLayer.TreeLeaves);
+
         public OakTree() : base(Name, Dura)
         {
             this.HarvestingBehavior = new DropWhenCompletelyHarvested(new List<Base.Item>()
@@ -29,7 +39,14 @@ namespace MagicalLifeAPI.World.Resources.Tree
 
         public override List<AbstractVisual> GetVisuals()
         {
-            throw new NotImplementedException();
+            List<AbstractVisual> ret = new List<AbstractVisual>
+            {
+                Trunk,
+                Leaves,
+                Stump
+            };
+
+            return ret;
         }
     }
 }
