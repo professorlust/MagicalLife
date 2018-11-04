@@ -49,7 +49,7 @@ namespace MagicalLifeAPI.Asset
         public static readonly string OakStump = "Textures/Resource/Plants/Trees/Stumps/Oak_Stump";
         public static readonly string OakTrunk = "Textures/Resource/Plants/Trees/Trunks/Oak_Trunk";
         public static readonly string OakLeaves1 = "Textures/Resource/Plants/Trees/Leaves/Oak_Leaves_01";
-        public static readonly string OakLeaves2 = "Oak_Leaves_01";
+        public static readonly string OakLeaves2 = "Textures/Resource/Plants/Trees/Leaves/Oak_Leaves_02";
 
         #endregion
 

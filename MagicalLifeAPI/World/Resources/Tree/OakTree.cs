@@ -7,16 +7,18 @@ using MagicalLifeAPI.Asset;
 using MagicalLifeAPI.Components.Generic.Renderable;
 using MagicalLifeAPI.Components.Resource;
 using MagicalLifeAPI.World.Items;
+using ProtoBuf;
 
 namespace MagicalLifeAPI.World.Resources.Tree
 {
     /// <summary>
     /// An oak tree.
     /// </summary>
+    [ProtoContract]
     public class OakTree : TreeBase
     {
         private static readonly string Name = "Oak Tree";
-        private static readonly int Dura = 20;
+        public static readonly int Durabilitie = 20;
 
         private static readonly StaticTexture Stump = new 
             StaticTexture(AssetManager.NameToIndex[TextureLoader.OakStump], RenderLayer.TreeStump);
@@ -27,12 +29,17 @@ namespace MagicalLifeAPI.World.Resources.Tree
         private static readonly StaticTexture Leaves = new
             StaticTexture(AssetManager.NameToIndex[TextureLoader.OakLeaves1], RenderLayer.TreeLeaves);
 
-        public OakTree() : base(Name, Dura)
+        public OakTree(int durability) : base(Name, durability)
         {
             this.HarvestingBehavior = new DropWhenCompletelyHarvested(new List<Base.Item>()
             {
                 new StoneRubble(this.Durability)
             });
+        }
+
+        public OakTree() : base()
+        {
+
         }
 
         public override AbstractHarvestable HarvestingBehavior { get; set; }
