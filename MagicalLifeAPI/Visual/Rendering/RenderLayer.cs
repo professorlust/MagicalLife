@@ -24,5 +24,7 @@ namespace MagicalLifeAPI.Components.Generic.Renderable
 
 
         public static readonly int Character = 20000;
+
+        public static readonly int GUI = int.MaxValue;
     }
 }
