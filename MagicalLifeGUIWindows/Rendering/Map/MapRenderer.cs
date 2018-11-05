@@ -59,7 +59,8 @@ namespace MagicalLifeGUIWindows.Rendering.Map
                         {
                             Point2D livingScreenLocation = new Point2D((int)(item.Value.ScreenLocation.X * Tile.GetTileSize().X), (int)(item.Value.ScreenLocation.Y * Tile.GetTileSize().Y));
                             MasterLog.DebugWriteLine("Entity: " + item.Value.ID.ToString() + "Screen position: " + item.Value.ScreenLocation.ToString());
-                            item.Value.Visual.Render(MapDrawer, livingScreenLocation);
+                            item.Value.Visual.ScreenTopLeft = livingScreenLocation;
+                            MapDrawer.AddRenderJob(item.Value.Visual);
                         }
                     }
                 }
@@ -72,6 +73,7 @@ namespace MagicalLifeGUIWindows.Rendering.Map
             if (tile.Item != null)
             {
                 Texture2D texture = AssetManager.Textures[tile.Item.TextureIndex];
+                //MapDrawer.AddRenderJob()
                 MapDrawer.Draw(texture, target, RenderLayer.Items);
             }
         }
@@ -84,7 +86,8 @@ namespace MagicalLifeGUIWindows.Rendering.Map
             //A target location for 32x textures to be centered in the tile, without being enlarged.
             Rectangle x32Target = new Rectangle(start.X + 16, start.Y + 16, 32, 32);
 
-            tile.CompositeRenderer.Render(MapDrawer, start);
+            MapDrawer.AddRenderJob(tile.CompositeRenderer.RenderQueue);
+            //tile.CompositeRenderer.Render(MapDrawer, start);
             DrawItems(MapDrawer, tile, new Rectangle(start.X, start.Y, Tile.GetTileSize().X, Tile.GetTileSize().Y));
 
             if (tile.ImpendingAction == MagicalLifeAPI.Entity.AI.Task.ActionSelected.Mine)
