@@ -15,7 +15,11 @@ namespace MagicalLifeGUIWindows.Rendering.Map
     {
         private SpriteBatch SpriteBat;
 
-        private RenderQueue RenderingQueue = new RenderQueue();
+        /// <summary>
+        /// Holds all of the rendering actions that need to happen.
+        /// </summary>
+        private List<RenderCallHolder> RenderActions = new List<RenderCallHolder>();
+        private RenderCallHolderComparer Comparator = new RenderCallHolderComparer();
 
         /// <summary>
         /// Updates the internal handle to a new <see cref="SpriteBatch"/>.
@@ -25,15 +29,6 @@ namespace MagicalLifeGUIWindows.Rendering.Map
         public void UpdateSpriteBatch(SpriteBatch spBatch)
         {
             this.SpriteBat = spBatch;
-            this.RenderingQueue.Visuals.Clear();
-        }
-
-        /// <summary>
-        /// Adds a render job to be completed at a later date.
-        /// </summary>
-        public void AddRenderJob(AbstractVisual visual)
-        {
-            this.RenderingQueue.Visuals.Add(visual);
         }
 
         /// <summary>
@@ -41,10 +36,14 @@ namespace MagicalLifeGUIWindows.Rendering.Map
         /// </summary>
         public void RenderAll()
         {
-            foreach (AbstractVisual item in this.RenderingQueue.Visuals)
+            this.RenderActions.Sort(this.Comparator);
+
+            foreach (RenderCallHolder item in this.RenderActions)
             {
-                item.Render(this);
+                item.Action.Invoke();
             }
+
+            this.RenderActions.Clear();
         }
 
         /// <summary>
@@ -52,7 +51,19 @@ namespace MagicalLifeGUIWindows.Rendering.Map
         /// </summary>
         /// <param name="texture"></param>
         /// <param name="target"></param>
-        public void Draw(Texture2D texture, Rectangle target)
+        /// <param name="renderLayer">The layer in which this rendering call should be made.</param>
+        public void Draw(Texture2D texture, Rectangle target, int renderLayer)
+        {
+            void renderCall() => this.Draw(texture, target);
+            this.RenderActions.Add(new RenderCallHolder(renderLayer, renderCall));
+        }
+
+        /// <summary>
+        /// Draws the <paramref name="texture"/> at the <paramref name="target"/> location. Applies a standard white mask.
+        /// </summary>
+        /// <param name="texture"></param>
+        /// <param name="target"></param>
+        private void Draw(Texture2D texture, Rectangle target)
         {
             int x = target.X + RenderInfo.XViewOffset;
             int y = target.Y + RenderInfo.YViewOffset;
@@ -66,7 +77,19 @@ namespace MagicalLifeGUIWindows.Rendering.Map
         /// <param name="texture">The texture to draw.</param>
         /// <param name="target">The target location to draw at.</param>
         /// <param name="textureSection">The section of the texture that will be drawn.</param>
-        public void Draw(Texture2D texture, Vector2 target, Rectangle textureSection)
+        public void Draw(Texture2D texture, Vector2 target, Rectangle textureSection, int renderLayer)
+        {
+            void renderCall() => this.Draw(texture, target, textureSection);
+            this.RenderActions.Add(new RenderCallHolder(renderLayer, renderCall));
+        }
+
+        /// <summary>
+        /// Draws a section of the texture at the target location.
+        /// </summary>
+        /// <param name="texture">The texture to draw.</param>
+        /// <param name="target">The target location to draw at.</param>
+        /// <param name="textureSection">The section of the texture that will be drawn.</param>
+        private void Draw(Texture2D texture, Vector2 target, Rectangle textureSection)
         {
             float x = (float)Math.Round(target.X + RenderInfo.XViewOffset);
             float y = (float)Math.Round(target.Y + RenderInfo.YViewOffset);
@@ -74,20 +97,18 @@ namespace MagicalLifeGUIWindows.Rendering.Map
             this.SpriteBat.Draw(texture, new Vector2(x, y), textureSection, Color.White);
         }
 
-        public void Draw(Texture2D texture, Vector2 target)
+        public void Draw(Texture2D texture, Vector2 target, int renderLayer)
+        {
+            void renderCall() => this.Draw(texture, target);
+            this.RenderActions.Add(new RenderCallHolder(renderLayer, renderCall));
+        }
+
+        private void Draw(Texture2D texture, Vector2 target)
         {
             int x = (int)Math.Round(target.X + RenderInfo.XViewOffset);
             int y = (int)Math.Round(target.Y + RenderInfo.YViewOffset);
 
             this.SpriteBat.Draw(texture, new Vector2(x, y), Color.White);
-        }
-
-        public void AddRenderJob(RenderQueue renderQueue)
-        {
-            foreach (AbstractVisual item in renderQueue.Visuals)
-            {
-                this.RenderingQueue.Visuals.Add(item);
-            }
         }
     }
 }

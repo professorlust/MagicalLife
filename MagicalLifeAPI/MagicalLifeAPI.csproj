@@ -110,6 +110,8 @@
     <Compile Include="Visual\Rendering\ComponentRenderer.cs" />
     <Compile Include="Visual\Rendering\AbstractVisuals\AbstractVisual.cs" />
     <Compile Include="Visual\Rendering\Renderer\MapBatch.cs" />
+    <Compile Include="Visual\Rendering\Renderer\RenderCallHolder.cs" />
+    <Compile Include="Visual\Rendering\Renderer\RenderCallHolderComparer.cs" />
     <Compile Include="Visual\Rendering\RenderInfo.cs" />
     <Compile Include="Visual\Rendering\RenderLayer.cs" />
     <Compile Include="Visual\Rendering\RenderQueue.cs" />

@@ -3,3 +3,8 @@ Credit for things I used that I didn't make
 Code Snippets:
 
 	Text Centering: https://stackoverflow.com/a/10263903/5294414
+
+
+
+
+	Save function calls for later, then invoke them for delayed drawing
