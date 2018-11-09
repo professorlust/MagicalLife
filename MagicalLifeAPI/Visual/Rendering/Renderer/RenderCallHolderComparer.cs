@@ -12,8 +12,16 @@ namespace MagicalLifeAPI.Visual.Rendering.Renderer
         {
             if (x.RenderLayer == y.RenderLayer)
             {
-                //They are equal in priority.
-                return 0;
+                if (x.RenderCallID >= y.RenderCallID)
+                {
+                    //x should be before y in priority.
+                    return 1;
+                }
+                else
+                {
+                    //x should be behind y.
+                    return -1;
+                }
             }
 
             if (x.RenderLayer > y.RenderLayer)

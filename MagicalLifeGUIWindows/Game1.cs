@@ -136,6 +136,7 @@ namespace MagicalLifeGUIWindows
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             FPS.Update(deltaTime);
+            MasterLog.DebugWriteLine("FPS: " + FPS.CurrentFramesPerSecond.ToString());
 
             this.DisplayInGame();
             FMODUtil.System.update();

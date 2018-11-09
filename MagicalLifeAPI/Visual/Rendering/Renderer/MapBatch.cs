@@ -1,5 +1,6 @@
 ﻿using MagicalLifeAPI.Components.Generic.Renderable;
 using MagicalLifeAPI.DataTypes;
+using MagicalLifeAPI.Util.Reusable;
 using MagicalLifeAPI.Visual.Rendering.Renderer;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -21,6 +22,8 @@ namespace MagicalLifeGUIWindows.Rendering.Map
         private List<RenderCallHolder> RenderActions = new List<RenderCallHolder>();
         private RenderCallHolderComparer Comparator = new RenderCallHolderComparer();
 
+        private Counter CallCounter = new Counter();
+
         /// <summary>
         /// Updates the internal handle to a new <see cref="SpriteBatch"/>.
         /// This should be called every frame.
@@ -36,14 +39,18 @@ namespace MagicalLifeGUIWindows.Rendering.Map
         /// </summary>
         public void RenderAll()
         {
-            this.RenderActions.Sort(this.Comparator);
-
-            foreach (RenderCallHolder item in this.RenderActions)
+            if (this.RenderActions.Count > 0)
             {
-                item.Action.Invoke();
-            }
+                this.RenderActions.Sort(this.Comparator);
 
-            this.RenderActions.Clear();
+                foreach (RenderCallHolder item in this.RenderActions)
+                {
+                    item.Action.Invoke();
+                }
+
+                this.RenderActions.Clear();
+                this.CallCounter.Reset();
+            }
         }
 
         /// <summary>
@@ -55,7 +62,7 @@ namespace MagicalLifeGUIWindows.Rendering.Map
         public void Draw(Texture2D texture, Rectangle target, int renderLayer)
         {
             void renderCall() => this.Draw(texture, target);
-            this.RenderActions.Add(new RenderCallHolder(renderLayer, renderCall));
+            this.RenderActions.Add(new RenderCallHolder(renderLayer, renderCall, this.CallCounter.Increment()));
         }
 
         /// <summary>
@@ -80,7 +87,7 @@ namespace MagicalLifeGUIWindows.Rendering.Map
         public void Draw(Texture2D texture, Vector2 target, Rectangle textureSection, int renderLayer)
         {
             void renderCall() => this.Draw(texture, target, textureSection);
-            this.RenderActions.Add(new RenderCallHolder(renderLayer, renderCall));
+            this.RenderActions.Add(new RenderCallHolder(renderLayer, renderCall, this.CallCounter.Increment()));
         }
 
         /// <summary>
@@ -100,7 +107,7 @@ namespace MagicalLifeGUIWindows.Rendering.Map
         public void Draw(Texture2D texture, Vector2 target, int renderLayer)
         {
             void renderCall() => this.Draw(texture, target);
-            this.RenderActions.Add(new RenderCallHolder(renderLayer, renderCall));
+            this.RenderActions.Add(new RenderCallHolder(renderLayer, renderCall, this.CallCounter.Increment()));
         }
 
         private void Draw(Texture2D texture, Vector2 target)

@@ -14,10 +14,16 @@ namespace MagicalLifeAPI.Visual.Rendering.Renderer
         public int RenderLayer;
         public Action Action;
 
-        public RenderCallHolder(int renderLayer, Action action)
+        /// <summary>
+        /// An ID used to track the order in which calls are recieved.
+        /// </summary>
+        public int RenderCallID;
+
+        public RenderCallHolder(int renderLayer, Action action, int renderCallIID)
         {
             this.RenderLayer = renderLayer;
             this.Action = action;
+            this.RenderCallID = renderCallIID;
         }
     }
 }
