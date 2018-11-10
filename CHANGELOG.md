@@ -5,9 +5,10 @@ SneakyTactician  <SneakyTactician@outlook.com>
 ## [Version 0.1.1]
 
 #### API
-
+*Trees are now in as a resource
 
 #### GUI
+*Trees now render
 
 #### Bugs
 *Items now render properly again
